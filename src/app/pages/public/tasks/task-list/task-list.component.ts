@@ -18,7 +18,7 @@ export class TaskListComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -40,9 +40,9 @@ export class TaskListComponent implements OnInit {
   //   }
   // }
 
-  createTask(newTask: Task) {
-    this.tasks.push(newTask)
-  }
+  // createTask(newTask: Task) {
+  //   this.tasks.push(newTask)
+  // }
 
   toggleTasks() {
     this.isExpanded = !this.isExpanded;
@@ -72,9 +72,14 @@ export class TaskListComponent implements OnInit {
       autoFocus: true,
       disableClose: false,
       restoreFocus: true
-    });
+    }).afterClosed().subscribe((result) => {
+      console.log('Dialog closed with result:', result)
+      if (result) {
+        this.tasks.unshift(result)
+        // this.tasks.push(result)
+      }
+    })
     console.log('form opened');
-    
   }
 
   openTask(task: Task) {

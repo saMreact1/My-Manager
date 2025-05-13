@@ -19,9 +19,24 @@ const userRoutes = require('./routes/userRoutes');
 const { Task } = require('./db/models/task.model');
 
 // ✅ Setup CORS properly for local dev
+// app.use(cors({
+//     origin: 'http://localhost:4200',
+//     credentials: true
+// }));
+const allowedOrigins = [
+  'http://localhost:4200',
+  'https://my-manager-five.vercel.app'
+];
+
 app.use(cors({
-    origin: 'http://localhost:4200', // Allow Angular dev server
-    credentials: true               // Allow cookies if needed (like with JWT auth)
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // only if you're sending cookies/auth headers
 }));
 
 // Load routes

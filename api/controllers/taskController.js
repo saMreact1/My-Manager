@@ -3,7 +3,7 @@ const { Task } = require('../db/models/task.model');
 // Get all tasks
 exports.getAllTasks = async (req, res) => {
     try {
-        const tasks = await Task.find();
+        const tasks = await Task.find().populate('assignedTo', 'name email');
         res.status(200).json(tasks);
     } catch (err) {
         res.status(500).json({ message: 'Error fetching tasks', error: err.message });

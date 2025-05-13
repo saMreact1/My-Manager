@@ -3,6 +3,8 @@ import { TaskService } from '../../../../core/services/task/task.service';
 import { Task } from '../../../../model/task.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth/auth.service';
+import { UserService } from '../../../../core/services/user/user.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-form',
@@ -21,10 +23,14 @@ export class TaskFormComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private taskService: TaskService,
-    private fb: FormBuilder // Injecting FormBuilder to create the form group
+    private fb: FormBuilder, // Injecting FormBuilder to create the form group
+    private userService: UserService,
+    private dialogRef: MatDialogRef<TaskFormComponent>
   ) {}
 
   ngOnInit(): void {
+    this.loadUsers();
+
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
@@ -45,22 +51,29 @@ export class TaskFormComponent implements OnInit {
       return;
     }
     const newTask = this.taskForm.value; // Get the form values
-  
-    console.log('📦 Submitting task:', newTask);
-  
+
     this.taskService.createTask(newTask).subscribe({
       next: (task) => {
         console.log('✅ Task created:', task);
-        this.taskCreated.emit(task); // Emit the new task to the parent component
-        this.close(); // Reset the form after submission
+        this.dialogRef.close(task);
+        // this.taskCreated.emit(task); // Emit the new task to the parent component
       },
       error: (err) => {
         console.error('🚨 Error creating task:', err);
       }
     });
+    
+    this.close(); // Reset the form after submission
   }
 
-  close() {
-    this.closeForm.emit();
+  loadUsers() {
+    this.userService.getAllUsers().subscribe({
+      next: (res) => this.users = res,
+      error:(err) => console.error('Failed to fetch users', err)
+    });
+  }
+
+  close(): void {
+    this.dialogRef.close();
   }
 }

@@ -15,7 +15,7 @@ export class UserService {
 
   createUser(userData: any) {
     const token = localStorage.getItem('token');  // Assuming the token is stored in localStorage
-    
+
     if(token) {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -25,5 +25,9 @@ export class UserService {
       console.log('No token available');
       return (null);
     }
+  }
+
+  getAllUsers() {
+    return this.web.get('admin/users')
   }
 }
