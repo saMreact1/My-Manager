@@ -1,0 +1,70 @@
+.container {
+    height: 100vh;
+    background: linear-gradient(135deg, #6e818d, #4d874f);
+}
+  
+.auth-container {
+  width: 30%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+
+  h2 {
+    color: #6a1b9a;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+      font-weight: bold;
+      background-color: #00acc1;
+      color: white;
+
+      &:hover {
+        background-color: #00838f;
+      }
+    }
+
+    
+  }
+  .switch-link {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #5c6bc0;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+}
+
+.error-message {
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+  font-family: monospace;
+  font-weight: bold;
+  /* margin-top: 1rem; */
+}
+  
+.success-message {
+  color: green;
+  font-size: 0.8rem;
+  text-align: center;
+  font-family: monospace;
+  font-weight: bold;
+  /* margin-top: 1rem; */
+}

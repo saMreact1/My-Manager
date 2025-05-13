@@ -1,0 +1,8 @@
+.chart-wrapper {
+    margin-top: 24px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid black;
+}

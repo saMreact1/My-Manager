@@ -1,0 +1,15 @@
+<mat-sidenav-container>
+  <mat-sidenav #drawer mode="side" [(opened)]="isExpanded">
+    <!-- Sidebar Content -->
+     <h1>Admin</h1>
+    <button mat-icon-button (click)="isExpanded = !isExpanded">
+      <mat-icon>{{ isExpanded ? 'menu_open' : 'menu' }}</mat-icon>
+    </button>
+    
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Top Toolbar -->
+    <!-- Main Content -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

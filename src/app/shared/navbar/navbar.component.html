@@ -1,0 +1,35 @@
+<mat-toolbar class="nav-bar">
+    <!-- <a mat-button routerLink="/dashboard">Dashboard</a> -->
+
+    <button mat-icon-button (click)="toggleSidenav()" class="hide-desktop">
+    <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="logo">TaskFlow</span>
+
+    <span class="spacer"></span>
+
+    <nav class="nav-links hide-mobile">
+        <a mat-button routerLink="/tasks">Tasks</a>
+
+        <ng-container *ngIf="isAuthenticated">
+            <a *ngIf="userRole === 'admin'" routerLink="/admin/create-user">Create User</a>
+            <a mat-button (click)="logout()">Logout</a>
+        </ng-container>
+
+        <ng-container *ngIf="!isAuthenticated">
+            <a routerLink="/login">Login</a>
+            <a routerLink="/register">Register</a>
+        </ng-container>
+    </nav>
+
+    <!-- <a *ngIf="auth.isAdmin()" mat-button routerLink="/admin">Admin</a> -->
+    <mat-slide-toggle (change)="toggleTheme()" color="accent" class="toggle"></mat-slide-toggle>
+</mat-toolbar>
+
+<mat-sidenav-container *ngIf="isMobile" class="sidenav-container">
+    <mat-sidenav #drawer mode="over" [(opened)]="sidenavOpen">
+        <a mat-list-item routerLink="/tasks">Tasks</a>
+        <a mat-list-item (click)="logout()">Logout</a>
+    </mat-sidenav>
+</mat-sidenav-container>

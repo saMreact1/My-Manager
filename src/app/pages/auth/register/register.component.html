@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="auth-container mat-elevation-z4">
+      <div *ngIf="error" class="error-message">
+        {{ error }}
+      </div>
+      <h2>Create an Account</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option value="admin">Admin</mat-option>
+            <mat-option value="user">Team Member</mat-option>
+          </mat-select>
+        </mat-form-field>
+    
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Register
+        </button>
+      </form>
+      <p class="switch-link">Already have an account? <a routerLink="/login">Login</a></p>
+    </div>
+</div>
+  

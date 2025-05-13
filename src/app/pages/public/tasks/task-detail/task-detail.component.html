@@ -1,0 +1,57 @@
+<div class="task-dialog-wrapper">
+  <h2 class="task-title">{{ task.title }}</h2>
+
+  <div class="task-section">
+    <p class="label">📋 Description</p>
+    <p class="value description">{{ task.description }}</p>
+  </div>
+
+  <div class="task-details-grid">
+    <div class="task-section">
+      <p class="label">📌 Status</p>
+      <span class="badge" [ngClass]="task.status.toLowerCase()">{{ task.status }}</span>
+    </div>
+    <div class="task-section">
+      <p class="label">⚡ Priority</p>
+      <span class="badge" [ngClass]="task.priority.toLowerCase()">{{ task.priority }}</span>
+    </div>
+  </div>
+
+  <div class="task-details-grid">
+    <div class="task-section">
+      <p class="label">📅 Start Date</p>
+      <p class="value">{{ formatDate(task.timeline.startDate) }}</p>
+    </div>
+    <div class="task-section">
+      <p class="label">📅 End Date</p>
+      <p class="value">{{ formatDate(task.timeline.endDate) }}</p>
+    </div>
+  </div>
+
+  <div class="assignedTo task-section">
+    <p class="label">Assigned To</p>
+    <p class="value">{{ task.assignedTo }}</p>
+  </div>
+
+  <div class="dialog-actions">
+    <button mat-stroked-button color="warn" (click)="close()">Close</button>
+  </div>
+</div>
+
+
+<!-- <div class="task-preview">
+  <h2 mat-dialog-title>Task Details</h2>
+  <div mat-dialog-content>
+  <p><strong>Title:</strong> {{ task.title }}</p>
+  <p><strong>Description:</strong> {{ task.description }}</p>
+  <p><strong>Status:</strong> {{ task.status }}</p>
+  <p><strong>Priority:</strong> 
+      <span [ngClass]="task.priority.toLowerCase()">{{ task.priority }}</span>
+  </p>
+  <p><strong>Start Date:</strong> {{ formatDate(task.timeline.startDate) }}</p>
+  <p><strong>End Date:</strong> {{ formatDate(task.timeline.endDate) }}</p>
+  </div>
+  <div mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+  </div>
+</div> -->

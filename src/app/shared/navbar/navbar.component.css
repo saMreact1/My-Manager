@@ -1,0 +1,44 @@
+.nav-bar {
+    background-color: rgb(26, 26, 42);
+    color: aliceblue;
+    height: 4rem;
+    .logo {
+        font-weight: bold;
+        font-size: 20px;
+        margin-left: 1rem;
+    }
+    .spacer { flex: 1 1 auto; }
+    .hide-mobile {
+        display: none;
+    }
+    .hide-desktop {
+        border: .5px solid rgb(173, 189, 203);
+        border-radius: 5px;
+        background: transparent;
+        outline: none;
+        cursor: pointer;
+    }
+    .hide-desktop mat-icon {
+        color: aliceblue;
+        /* cursor: pointer; */
+    }
+
+    @media (min-width: 768px) {
+        .hide-mobile {
+            display: flex;
+            gap: .7rem;
+        }
+        .hide-desktop { display: none; }
+    }
+}
+
+.nav-bar .nav-links a {
+    color: aliceblue;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-bar .toggle {
+    margin-left: 2rem;
+}
