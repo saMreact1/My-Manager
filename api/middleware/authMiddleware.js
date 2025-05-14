@@ -4,13 +4,13 @@ const JWT_SECRET = process.env.JWT_SECRET || 'superSecretKey';
 
 // Authentication Middleware
 exports.authMiddleware = (req, res, next) => {
-    const authHeader = req.headers['authorization']; // ✅ Correct spelling!
+    const authHeader = req.headers['authorization'];
 
     // Log the Authorization header to see what it's receiving
     console.log('Authorization Header:', authHeader);
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) { // ✅ Check for 'Bearer ' with a space
-        return res.status(401).json({ message: 'No token provided' });
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ message: 'No token provided' });
     }
 
     const token = authHeader.split(' ')[1];

@@ -6,11 +6,25 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StatsService {
-  private apiUrl = 'http://localhost:3000/tasks/tasks-stats'
+  private apiUrl = 'http://localhost:3000/tasks/stats'
 
   constructor(private http: HttpClient) { }
 
-  getTaskStats(): Observable<any> {
-    return this.http.get<any>(this.apiUrl)
-  }
+  getDashboardStats() {
+  return this.http.get<{
+    totalTasks: number;
+    pending: number;
+    inProgress: number;
+    done: number;
+    users: number;
+  }>(this.apiUrl);
+}
+
+  // getTaskStats(): Observable<any> {
+  //   return this.http.get<any>(this.apiUrl)
+  // }
+
+  // getUserStats() {
+  //   return this.http.get<{ totalUsers: number }>('/users/stats');
+  // }
 }

@@ -1,11 +1,11 @@
-// Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 
 // Components
 import { AppComponent } from './app.component';
@@ -47,6 +47,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipListbox } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 
 
@@ -67,7 +68,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SidebarComponent,
     UserListComponent,
     StatsCardsComponent,
-    ChartsComponent
+    ChartsComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +101,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   providers: [
     provideAnimationsAsync(),
-    provideCharts(withDefaultRegisterables())
+    provideCharts(withDefaultRegisterables()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

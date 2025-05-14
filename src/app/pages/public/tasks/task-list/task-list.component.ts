@@ -21,28 +21,24 @@ export class TaskListComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
 
-  ngOnInit() {
-    this.getTasks();
+  ngOnInit(): void {
+    // this.getTasks();
+
+    this.taskService.getUserTasks().subscribe({
+      next: (tasks) => {
+        this.tasks = tasks;
+        console.log('Fetched user tasks', tasks)
+      },
+      error: (err) => {
+        console.error('Failed to load user tasks', err)
+      }
+    })
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['tasks']) {
       console.log('Task updated:', this.tasks);
     }
   }
-
-  // saveTasks() {
-  //   localStorage.setItem('tasks', JSON.stringify(this.tasks));
-  // }
-  // loadTasks() {
-  //   if (typeof window !== 'undefined' && localStorage) {
-  //     const storedTasks = localStorage.getItem('tasks');
-  //     this.tasks = storedTasks ? JSON.parse(storedTasks) : [];
-  //   }
-  // }
-
-  // createTask(newTask: Task) {
-  //   this.tasks.push(newTask)
-  // }
 
   toggleTasks() {
     this.isExpanded = !this.isExpanded;

@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Task } from '../../../model/task.model';
 import { isPlatformBrowser } from '@angular/common';
 import { WebService } from '../web-request/web.service';
-
+import  { HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,47 +29,13 @@ export class TaskService {
     return this.webService.put(`tasks/${task._id}`, task);
   }
 
+  getUserTasks(): Observable<any> {
+    const token = localStorage.getItem('token');
 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
 
-  // setTask(task: Task) {
-  //   this.taskSource.next(task);
-  // }
-
-  // addTask(task: Task) {
-  //   const currentTasks = this.tasksSubject.getValue()
-  //   const updatedTasks = [...currentTasks, task]
-  //   this.tasksSubject.next(updatedTasks)
-  //   this.saveTasks(updatedTasks)
-  // }
-
-  // deleteTask(id: number) {
-  //   const updatedTasks = this.tasksSubject.getValue().filter(task => task.id !== id)
-  //   this.tasksSubject.next(updatedTasks)
-  //   this.saveTasks(updatedTasks)
-  // }
-
-  // private loadTasks(): Task[] {
-  //   if(isPlatformBrowser(this.platformId)) {
-  //     const storedTasks = localStorage.getItem(this.storageKey)
-  //     return storedTasks ? JSON.parse(storedTasks) : []
-  //   }
-  //   return []
-  // }
-
-  // private saveTasks(tasks: Task[]) {
-  //   if(isPlatformBrowser(this.platformId)) {
-  //     localStorage.setItem(this.storageKey, JSON.stringify(tasks))
-  //   }
-  // }
-
-  // updateTask(updatedTask: Task) {
-  //   const currentTasks = this.tasksSubject.getValue();
-  //   const updatedTasks = currentTasks.map(task =>
-  //     task.id === updatedTask.id ? updatedTask : task
-  //   );
-  //   this.tasksSubject.next(updatedTasks);
-  //   localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // optional if you’re using localStorage
-  // }
-  
-
+    return this.webService.get('tasks/user', { headers }); // ✅ pass headers here
+  }
 }

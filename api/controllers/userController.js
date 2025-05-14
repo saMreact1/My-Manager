@@ -6,7 +6,6 @@ exports.createUser = async (req, res) => {
     const { name, email, password, role } = req.body;
     // console.log('Received data:', req.body);
 
-    // Insert into DB or your logic here
     const user = await User.create({ name, email, password, role });
     res.status(201).json(user);
   } catch (err) {
@@ -18,10 +17,20 @@ exports.createUser = async (req, res) => {
 exports.getUsers = (req, res) => {
     User.find()  // Find all users
         .then(users => {
-            res.status(200).json(users);  // Send the users as a response
+            res.status(200).json(users);
         })
         .catch(err => {
-            // console.error("Error fetching users:", err);  // Log the error
+            console.error("Error fetching users:", err);
             res.status(500).json({ message: 'Internal server error' });
         });
 };
+
+// exports.getUserStats = async (req, res) => {
+//   try {
+//     const totalUsers = await User.countDocuments();
+//     res.json({ totalUsers });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: 'Failed to fetch user stats' });
+//   }
+// };

@@ -32,9 +32,9 @@ export class TaskDetailComponent {
 
   getStatusColor(status: string): string {
     switch (status.toLowerCase()) {
-      case 'pending': return 'warn';
-      case 'in progress': return 'accent';
-      case 'completed': return 'primary';
+      case 'Pending': return 'warn';
+      case 'In-progress': return 'accent';
+      case 'Completed': return 'primary';
       default: return '';
     }
   }  
