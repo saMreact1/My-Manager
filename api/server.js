@@ -25,7 +25,8 @@ const { Task } = require('./db/models/task.model');
 // }));
 const allowedOrigins = [
   'http://localhost:4200',
-  'https://my-manager-five.vercel.app'
+  'https://my-manager-five.vercel.app',
+  'http://localhost:55386'
 ];
 
 app.use(cors({

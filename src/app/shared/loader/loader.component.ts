@@ -29,7 +29,6 @@ export class LoaderComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.apiCallSubscription = this.loaderService.isLoading.subscribe((isLoading: boolean) => {
         this.loading = isLoading;
-        console.log('LOADER STATUS:', isLoading);
         if (isLoading) {
           this.disableUserInput();
         } else {
