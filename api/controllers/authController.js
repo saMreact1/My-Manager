@@ -1,6 +1,6 @@
 const {User} = require('../db/models/user.model');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'superSecretKey'; // Use a strong secret key in production
 
