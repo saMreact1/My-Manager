@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
+import { environment } from '../../../../environments/environment';
+
 
 export interface DecodedToken {
   id: string;
@@ -16,7 +18,7 @@ export interface DecodedToken {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';
+  // private apiUrl = 'http://localhost:3000/auth';
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
@@ -32,7 +34,7 @@ export class AuthService {
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post<{token: string}>(`${this.apiUrl}/login`, credentials).pipe(
+    return this.http.post<{token: string}>(`${environment.apiUrl}/login`, credentials).pipe(
       tap((res: any) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
@@ -53,7 +55,7 @@ export class AuthService {
   }
 
   register(data: { name: string; email: string; password: string; role: string }): Observable<any> {
-    return this.http.post<{token: string}>(`${this.apiUrl}/register`, data).pipe(
+    return this.http.post<{token: string}>(`${environment.apiUrl}/register`, data).pipe(
       tap((res: any) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
@@ -90,7 +92,5 @@ export class AuthService {
   getCurrentUserRole(): string | null {
     const token = this.getToken();
     return token ? this.getRole(token) : null;
-    // const user = localStorage.getItem('user');
-    // return user ? JSON.parse(user) : null;
   }
 }
