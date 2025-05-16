@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { environment } from '../../../../../environments/environment';
 
 interface User {
   _id: string;        // or 'id' depending on your backend
@@ -19,7 +20,7 @@ interface User {
 })
 export class UserListComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'email', 'role', 'createdAt'];
+  displayedColumns: string[] = ['name', 'email', 'role'];
   dataSource = new MatTableDataSource<any>([]);
   users: User[] = [];
 
@@ -31,7 +32,7 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://localhost:3000/admin/users').subscribe(users => {
+    this.http.get<any[]>(`${environment.apiUrl}admin/users`).subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -41,7 +42,7 @@ export class UserListComponent implements OnInit {
   }
 
   fetchUsers() {
-    this.http.get<User[]>('http://localhost:3000/admin/users')
+    this.http.get<User[]>(`${environment.apiUrl}admin/users`)
       .subscribe(users => {
         this.users = users;
       });

@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post<{token: string}>(`${environment.apiUrl}/login`, credentials).pipe(
+    return this.http.post<{token: string}>(`${environment.apiUrl}auth/login`, credentials).pipe(
       tap((res: any) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   register(data: { name: string; email: string; password: string; role: string }): Observable<any> {
-    return this.http.post<{token: string}>(`${environment.apiUrl}/register`, data).pipe(
+    return this.http.post<{token: string}>(`${environment.apiUrl}auth/register`, data).pipe(
       tap((res: any) => {
         if (res.token) {
           localStorage.setItem('token', res.token);

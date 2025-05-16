@@ -1,1 +1,45 @@
-<p>dashboard works!</p>
+<mat-sidenav-container class="dashboard-container">
+  <mat-sidenav #sidenav mode="side" class="sidenav mat-elevation-z8" opened>
+    <div class="logo-container">
+      <img src="../../../../../assets/icons/logo.jpg" class="brand-logo" />
+      <span class="brand-name" *ngIf="isCollapsed">My Manager</span>
+    </div>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard/tasks" routerLinkActive="active-link" class="tasks" matTooltip="Tasks" matTooltipPosition="right">
+        <div>
+          <mat-icon>assignment</mat-icon>
+          <span>My Tasks</span>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/dashboard/coming-soon" routerLinkActive="active-link" class="profile" matTooltip="Profile" matTooltipPosition="right">
+        <div>
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/home" routerLinkActive="active-link" class="logout" matTooltip="Logout" matTooltipPosition="right">
+        <div>
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="user-navbar">
+      <h2>Welcome back, {{ userName }} 👋</h2>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <div class="dashboard-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,102 @@
+.dashboard-container {
+  background: #0057a4 url('../../../../assets/img/white_bg.avif');
+  height: 100vh;
+}
+
+.dashboard-content {
+  padding: 24px;
+}
+
+.user-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.sidenav {
+  width: 190px;
+  padding: 0;
+  background: #0057a4 url('../../../../assets/img/blue-fluid-background-frame.avif');
+  border: none;
+}
+
+.logo-container {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1rem .5rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #5619f2;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+}
+
+mat-nav-list {
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+mat-nav-list a {
+  margin: 15px 0;
+  padding: 20px 16px;
+  transition: background 0.3s ease;
+}
+mat-nav-list a span {
+  color: #000;
+  font-weight: 500;
+  font-size: .95rem;
+}
+mat-nav-list a mat-icon {
+  background: rgba(15, 13, 13, 0.319);
+  width: 30px;
+  height: 30px;
+  color: #310af4;
+  margin-right: .5rem;
+  padding: 3px;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+mat-nav-list a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+mat-nav-list a.active-link::after {
+  content: '';
+  background-color: #f4f6f8;
+  position: absolute;
+  width: 5px;
+  height: inherit;
+  right: 0;
+  top: 0;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+mat-nav-list a.active-link {
+  background-color: #cdb596;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0;
+}
+mat-nav-list a:nth-of-type(3) {
+  position: absolute;
+  bottom: 0rem;
+}
+
+mat-nav-list a div {
+  display: flex;
+  align-items: center;
+}

@@ -43,7 +43,7 @@ export class RegisterComponent {
       next: (res) => {
         console.log('Register Response:', res);
         this.auth.saveToken(res.token);
-        this.router.navigate(['/tasks'])
+        this.router.navigate(['/login'])
 
         // if(role === 'admin') {
         //   this.router.navigate(['/admin-dashboard']);

@@ -1,0 +1,16 @@
+<div class="coming-soon-container">
+  <div class="logo-wrapper" @fadeIn>
+    <mat-icon class="main-icon">hourglass_empty</mat-icon>
+    <h1>Something Awesome is Coming</h1>
+  </div>
+
+  <div class="typewriter" @slideIn>
+    <h2>{{ currentMessage }}</h2>
+  </div>
+
+  <p class="pulse-text">Launching soon... 🚀</p>
+
+  <div class="countdown-timer">
+    <p>{{ countdown.days }}d {{ countdown.hours }}h {{ countdown.minutes }}m {{ countdown.seconds }}s</p>
+  </div>
+</div>

@@ -7,7 +7,7 @@
 
 .sidenav {
   width: 190px;
-  background: #0057a4 url('../../../../../assets/sidenav-bg.jpg');
+  background: #0057a4 url('../../../../../assets/img/sidenav-bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
@@ -147,119 +147,7 @@ mat-nav-list a:nth-of-type(5) {
 
 .content-wrapper {
   padding: 24px;
-  background: url('../../../../../assets/white-bg.jpg');
+  background: url('../../../../../assets/img/white-bg.jpg');
   flex-grow: 1;
   overflow-y: auto;
 }
-
-
-
-
-/* .dashboard-container {
-  height: 100vh;
-}
-
-.sidenav {
-  width: 200px;
-  background-color: #3f51b5;
-  color: white;
-  transition: width 0.3s ease-in-out;
-  border-right: 1px solid #f9f9f9;
-
-  &.collapsed {
-    width: 70px;
-
-    .logo-container span,
-    mat-nav-list span {
-      display: none;
-    }
-  }
-
-  .logo-container {
-    display: flex;
-    align-items: center;
-    padding: 16px;
-    font-size: 20px;
-    font-weight: 600;
-    mat-icon {
-      margin-right: 10px;
-    }
-  }
-
-  a.mat-list-item {
-    color: white;
-
-    mat-icon {
-      margin-right: 8px;
-    }
-  }
-}
-
-mat-nav-list {
-  margin-top: 2rem;
-}
-mat-nav-list a {
-  border: 2px solid rgb(246 243 243 / 87%);
-  border-left: 10px solid rgb(246 243 243 / 87%);
-  border-right: none;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-}
-mat-nav-list a.active--link div {
-  background-color: rgb(246 243 243 / 87%);
-}
-mat-nav-list a div {
-  color: rgb(246 243 243 / 87%);
-}
-
-.sidenav .overview, .sidenav .users, .sidenav .tasks {
-  width: 160px; */
-  /* background-color: rgb(240 233 233 / 87%); */
-  /* float: right;
-  margin-bottom: 1.5rem;
-}
-.sidenav .overview div, .sidenav .users div, .sidenav .tasks div {
-  display: flex;
-  align-items: center;
-  gap: 10px; */
-  /* justify-content: center; */
-  /* background-color: #1f1f2b; */
-/* } */
-/* .sidenav .overview div::before, .sidenav .users div::before,
-.sidenav .tasks div::before {
-  content: '';
-  position: absolute;
-  height: 55px;
-  width: 20px;
-  background: #f6f6f9;
-  right: -10px;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-}
-
-.toolbar {
-  display: flex;
-  align-items: center;
-  border-left: 1px solid #3f51b5;
-
-  .toolbar-title {
-    margin-left: 12px;
-    font-weight: bold;
-  }
-
-  .spacer {
-    flex: 1 1 auto;
-  }
-}
-
-.main-content {
-  background-color: #f9f9f9;
-  height: 100%;
-  overflow-y: auto;
-
-  .content-wrapper {
-    padding: 24px;
-  }
-} */

@@ -42,6 +42,10 @@ app.use(cors({
 }));
 
 // Load routes
+app.get('/', (req, res) => {
+  res.send('🚀 Backend is live and working!');
+});
+
 app.use('/auth', authRoutes); // Use auth routes
 app.use('/tasks', taskRoutes); // Use task routes
 app.use('/admin', userRoutes);

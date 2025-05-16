@@ -1,0 +1,78 @@
+.coming-soon-container {
+  height: calc(100vh - 7rem);
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  font-family: monospace;
+}
+
+.logo-wrapper {
+  margin-bottom: 1rem;
+
+  .main-icon {
+    font-size: 4rem;
+    color: #00e676;
+    animation: bounce 2s infinite;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.typewriter h2 {
+  font-size: 1.2rem;
+  border-right: 2px solid #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 4s steps(40, end) forwards;
+}
+
+.pulse-text {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+.countdown-timer {
+  margin-top: 2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 240px;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-10%);
+  }
+  50% {
+    transform: translateY(10%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}

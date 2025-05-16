@@ -42,11 +42,6 @@ export class AdminDashboardComponent {
   isCollapsed: boolean = true;
   isDarkMode: boolean = false;
 
-  // userCount = 120;
-  // taskCount = 350;
-  // pendingTasks = 90;
-  // completedTasks = 260;
-
   constructor(
     private taskService: TaskService,
     private userService: UserService,

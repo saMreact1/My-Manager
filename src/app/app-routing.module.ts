@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/public/home/home.component';
+import { ComingSoonComponent } from './pages/public/coming-soon/coming-soon.component';
+import { DashboardComponent } from './pages/public/dashboard/dashboard.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { TaskListComponent } from './pages/public/tasks/task-list/task-list.component';
@@ -55,6 +57,15 @@ const routes: Routes = [
     path: 'users',
     component: UserListComponent
   },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      { path: 'tasks', component: TaskListComponent },
+      { path: 'coming-soon', component: ComingSoonComponent },
+      { path: '', redirectTo: 'tasks', pathMatch: 'full' }
+    ]
+  }
 ];
 
 @NgModule({

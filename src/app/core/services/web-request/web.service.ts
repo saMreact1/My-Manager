@@ -10,7 +10,7 @@ export class WebService {
   readonly ROOT_URL;
 
   constructor(private http: HttpClient) {
-    this.ROOT_URL = 'http://localhost:3000';
+    this.ROOT_URL = 'https://my-manager-api.onrender.com';
   }
 
   get(url: string, options = {}): Observable<any> {

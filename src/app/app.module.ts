@@ -48,6 +48,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatChipListbox } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { ComingSoonComponent } from './pages/public/coming-soon/coming-soon.component';
 
 
 
@@ -69,7 +70,8 @@ import { LoaderComponent } from './shared/loader/loader.component';
     UserListComponent,
     StatsCardsComponent,
     ChartsComponent,
-    LoaderComponent
+    LoaderComponent,
+    ComingSoonComponent
   ],
   imports: [
     BrowserModule,
