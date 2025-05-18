@@ -4,14 +4,14 @@ const { User } = require('../db/models/user.model');
 exports.createUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 7);
 
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
       role,
-      tenantId: req.tenantId // attach tenant context
+      tenantId: req.user.tenantId // attach tenant context
     });
 
     await newUser.save();
@@ -24,7 +24,7 @@ exports.createUser = async (req, res) => {
 // Get all users under current tenant
 exports.getUsers = async (req, res) => {
   try {
-    const users = await User.find({ tenantId: req.tenantId });
+    const users = await User.find({ tenantId: req.user.tenantId });
     res.json(users);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching users', error: err.message });

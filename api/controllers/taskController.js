@@ -19,7 +19,7 @@ exports.createTask = async (req, res) => {
       await newTask.save();
       res.status(201).json(newTask);
     } catch (err) {
-      res.status(500).json({ message: 'Error creating task', error: err });
+      res.status(500).json({ message: 'Error creating task', error: err.message });
     }
 };
 
@@ -32,7 +32,7 @@ exports.updateTask = async (req, res) => {
       }
       res.status(200).json(updatedTask);
     } catch (err) {
-      res.status(500).json({ message: 'Error updating task', error: err });
+      res.status(500).json({ message: 'Error updating task', error: err.message });
     }
 };
 
@@ -45,7 +45,7 @@ exports.deleteTask = async (req, res) => {
     }
     res.status(200).json({ message: 'Task deleted successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Error deleting task', error: err });
+    res.status(500).json({ message: 'Error deleting task', error: err.message });
   }
 };
 

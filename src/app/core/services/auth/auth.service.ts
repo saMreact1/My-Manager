@@ -53,8 +53,28 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
+  // register(data: { name: string; email: string; password: string; role: string }): Observable<any> {
+  //   return this.http.post<{token: string}>(`${environment.apiUrl}auth/register`, data).pipe(
+  //     tap((res: any) => {
+  //       console.log('🌐 Response from backend:', res);
+  //       if (res.token) {
+  //         localStorage.setItem('token', res.token);
+  //         localStorage.setItem('user', JSON.stringify(res.user));
+  //         this.currentUserSubject.next(res.user);
+  //       } else {
+  //         console.error('No token received in response');
+  //       }
+  //     })
+  //   );
+  // }
   register(data: { name: string; email: string; password: string; role: string }): Observable<any> {
-    return this.http.post<{token: string}>(`${environment.apiUrl}auth/register`, data).pipe(
+    const token = localStorage.getItem('token'); // ⬅️ pull the stored token
+
+    return this.http.post<{ token: string }>(`${environment.apiUrl}auth/register`, data, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      })
+    }).pipe(
       tap((res: any) => {
         console.log('🌐 Response from backend:', res);
         if (res.token) {
@@ -67,6 +87,7 @@ export class AuthService {
       })
     );
   }
+
 
   logout() {
     localStorage.removeItem('token');

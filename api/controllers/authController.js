@@ -99,6 +99,44 @@ exports.registerAdmin = async (req, res) => {
 };
 
 
+// exports.login = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     const user = await User.findOne({ email, tenantId: req.user.tenantId });
+//     if (!user) {
+//       return res.status(401).json({ message: 'User not found' });
+//     }
+
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) {
+//       return res.status(401).json({ message: 'Invalid credentials' });
+//     }
+
+//     if (user.role === 'admin' && !user.tenantId) {
+//       user.tenantId = user._id;
+//       await user.save();
+//     }
+
+//     const token = createToken(user);
+
+//     res.status(200).json({
+//       message: 'Login successful',
+//       token,
+//       user: {
+//         id: user._id,
+//         name: user.name,
+//         email: user.email,
+//         role: user.role,
+//         tenantId: user.tenantId || user._id
+//       }
+//     });
+//   } catch (err) {
+//     console.error('❌ Login error: ', err);
+//     res.status(500).json({ message: 'Login failed', error: err.message });
+//   }
+// };
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -148,4 +186,3 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: 'Login failed', error: err.message });
   }
 };
-
