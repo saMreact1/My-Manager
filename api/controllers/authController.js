@@ -103,23 +103,34 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email, tenantId: req.user.tenantId });
+    // 🧠 Find user
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
 
+    // 🔐 Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Invalid password' });
     }
 
-    if (user.role === 'admin' && !user.tenantId) {
+    // 🛠️ Fallback: Assign tenantId if missing (especially for admins)
+    if (!user.tenantId) {
       user.tenantId = user._id;
       await user.save();
     }
 
-    const token = createToken(user);
+    // 🎟️ Create JWT
+    const token = jwt.sign({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      tenantId: user.tenantId,
+    }, JWT_SECRET, { expiresIn: '7d' });
 
+    // ✅ Send response
     res.status(200).json({
       message: 'Login successful',
       token,
@@ -128,11 +139,13 @@ exports.login = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        tenantId: user.tenantId || user._id
+        tenantId: user.tenantId
       }
     });
+
   } catch (err) {
-    console.error('❌ Login error: ', err);
+    console.error('Login error: ', err);
     res.status(500).json({ message: 'Login failed', error: err.message });
   }
 };
+
