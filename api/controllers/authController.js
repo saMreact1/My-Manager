@@ -141,6 +141,8 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    console.log('📥 Incoming login request body:', req.body);
+
     // 🧠 Find user
     const user = await User.findOne({ email });
     if (!user) {
@@ -150,6 +152,13 @@ exports.login = async (req, res) => {
     // 🔐 Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      console.log('🔐 Input password:', password);
+      console.log('🔐 Stored hash:', user.password);
+      console.log('✅ Password match:', isMatch);
+      console.log('Login request:', req.body);
+      console.log('User found:', user);
+
+
       return res.status(401).json({ message: 'Invalid password' });
     }
 

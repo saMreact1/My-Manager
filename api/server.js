@@ -8,7 +8,7 @@ require('dotenv').config(); // Load environment variables from .env file
 const { mongoose } = require('./db/mongoose'); // Load mongoose connection
 
 // Load middleware
-app.use(bodyParser.json()); // Parse JSON request body
+// app.use(bodyParser.json()); // Parse JSON request body
 app.use(express.json())
 
 const authRoutes = require('./routes/authRoutes'); // Load auth routes
@@ -25,7 +25,6 @@ const { Task } = require('./db/models/task.model');
 // }));
 const allowedOrigins = [
   'http://localhost:4200',
-  'https://my-manager-five.vercel.app',
   'https://my-managerr.netlify.app'
 ];
 
