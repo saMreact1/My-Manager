@@ -7,7 +7,7 @@ const { tenantFilter } = require('../middleware/tenantMiddleware');
 // Admin-only route to create new users
 router.use(tenantFilter);
 
-router.post('/users', authMiddleware.authenticate, requireRole('admin'), userController.createUser);
-router.get('/users', authMiddleware.authenticate, requireRole('admin'), userController.getUsers);
+router.post('/users', authMiddleware.authenticate, authMiddleware.requireRole('admin'), userController.createUser);
+router.get('/users', authMiddleware.authenticate, authMiddleware.requireRole('admin'), userController.getUsers);
 
 module.exports = router;
