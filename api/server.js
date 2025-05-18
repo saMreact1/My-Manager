@@ -26,8 +26,7 @@ const { Task } = require('./db/models/task.model');
 const allowedOrigins = [
   'http://localhost:4200',
   'https://my-manager-five.vercel.app',
-  'http://localhost:54004',
-  'https://my-manager-cpkk2ov1i-samreact1s-projects.vercel.app'
+  'https://my-managerr.netlify.app'
 ];
 
 app.use(cors({

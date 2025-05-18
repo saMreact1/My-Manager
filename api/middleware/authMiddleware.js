@@ -1,32 +1,43 @@
 const jwt = require('jsonwebtoken');
+const { User } = require('../db/models/user.model')
 
 const JWT_SECRET = process.env.JWT_SECRET || 'superSecretKey';
 
-// Authentication Middleware
-exports.authMiddleware = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-
-    // Log the Authorization header to see what it's receiving
-    console.log('Authorization Header:', authHeader);
+exports.authenticate = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'No token provided' });
+      return res.status(401).json({ message: 'Missing or invalid token' });
     }
 
     const token = authHeader.split(' ')[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
 
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = decoded; // ✅ Attach the user to the request
-        next();
-    } catch (err) {
-        console.error('Token verification failed:', err.message);
-        return res.status(401).json({ message: 'Token is invalid or expired' }); // ✅ 401 for token problems
+    // Optional: fetch user from DB if needed
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid token user' });
     }
-}
+
+    req.user = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      tenantId: user.tenantId
+    };
+
+    next();
+  } catch (err) {
+    console.error('Auth error:', err);
+    return res.status(401).json({ message: 'Token verification failed' });
+  }
+};
 
 // Role-based Authorization Middleware
-exports.requireRole = (role) => {
+exports.requireRole = (...role) => {
     return (req, res, next) => {
         if (!req.user) {
             return res.status(401).json({ message: 'Unauthorized. No user information available.' });

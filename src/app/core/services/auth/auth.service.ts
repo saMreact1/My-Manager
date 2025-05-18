@@ -18,7 +18,6 @@ export interface DecodedToken {
   providedIn: 'root'
 })
 export class AuthService {
-  // private apiUrl = 'http://localhost:3000/auth';
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
@@ -57,6 +56,7 @@ export class AuthService {
   register(data: { name: string; email: string; password: string; role: string }): Observable<any> {
     return this.http.post<{token: string}>(`${environment.apiUrl}auth/register`, data).pipe(
       tap((res: any) => {
+        console.log('🌐 Response from backend:', res);
         if (res.token) {
           localStorage.setItem('token', res.token);
           localStorage.setItem('user', JSON.stringify(res.user));
@@ -92,5 +92,13 @@ export class AuthService {
   getCurrentUserRole(): string | null {
     const token = this.getToken();
     return token ? this.getRole(token) : null;
+  }
+
+  getTenantId(): string | null {
+    const token = localStorage.getItem('token');
+    if(!token) return null;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.tenantId;
   }
 }
