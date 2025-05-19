@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 
 // Components
@@ -25,6 +26,8 @@ import { DeleteConfirmationComponent } from './pages/public/tasks/delete-confirm
 import { SidebarComponent } from './pages/public/admin/sidebar/sidebar.component';
 import { UserListComponent } from './pages/public/admin/user-list/user-list.component';
 import { StatsCardsComponent } from './pages/public/admin/stats-cards/stats-cards.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { ComingSoonComponent } from './pages/public/coming-soon/coming-soon.component';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -47,8 +50,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipListbox } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { LoaderComponent } from './shared/loader/loader.component';
-import { ComingSoonComponent } from './pages/public/coming-soon/coming-soon.component';
 
 
 
@@ -107,6 +108,11 @@ import { ComingSoonComponent } from './pages/public/coming-soon/coming-soon.comp
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true
     }
   ],

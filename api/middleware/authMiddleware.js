@@ -22,11 +22,11 @@ exports.authenticate = async (req, res, next) => {
     }
 
     req.user = {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      tenantId: user.tenantId
+      id: decoded._id,
+      name: decoded.name,
+      email: decoded.email,
+      role: decoded.role,
+      tenantId: decoded.tenantId
     };
 
     next();
