@@ -18,6 +18,7 @@ export interface DecodedToken {
   providedIn: 'root'
 })
 export class AuthService {
+  
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
@@ -68,25 +69,25 @@ export class AuthService {
   //   );
   // }
   register(data: { name: string; email: string; password: string; role: string }): Observable<any> {
-    const token = localStorage.getItem('token'); // ⬅️ pull the stored token
+  const token = localStorage.getItem('token'); // ⬅️ pull the stored token
 
-    return this.http.post<{ token: string }>(`${environment.apiUrl}auth/register`, data, {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`
-      })
-    }).pipe(
-      tap((res: any) => {
-        console.log('🌐 Response from backend:', res);
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('user', JSON.stringify(res.user));
-          this.currentUserSubject.next(res.user);
-        } else {
-          console.error('No token received in response');
-        }
-      })
-    );
-  }
+  return this.http.post<{ token: string }>(`${environment.apiUrl}auth/register`, data, {
+    headers: new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    })
+  }).pipe(
+    tap((res: any) => {
+      console.log('🌐 Response from backend:', res);
+      if (res.token) {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('user', JSON.stringify(res.user));
+        this.currentUserSubject.next(res.user);
+      } else {
+        console.error('No token received in response');
+      }
+    })
+  );
+}
 
 
   logout() {

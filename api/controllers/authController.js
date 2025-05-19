@@ -14,40 +14,40 @@ const createToken = (user) => {
   }, JWT_SECRET, {expiresIn: '7d'});
 }
 
-exports.register = async (req, res) => {
-  try {
-    const { name, email, password, role } = req.body;
-    const existingUser = await User.findOne({ email, tenantId: req.user.tenantId });
+// exports.register = async (req, res) => {
+//   try {
+//     const { name, email, password, role } = req.body;
+//     const existingUser = await User.findOne({ email, tenantId: req.user.tenantId });
 
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
+//     if (existingUser) {
+//       return res.status(400).json({ message: 'User already exists' });
+//     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+//     const hashedPassword = await bcrypt.hash(password, 7);
 
-    const newUser = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      role,
-      tenantId: req.user.tenantId // 👈 This is key
-    });
+//     const newUser = await User.create({
+//       name,
+//       email,
+//       password: hashedPassword,
+//       role,
+//       tenantId: req.user.tenantId // 👈 This is key
+//     });
 
-    res.status(201).json({
-      message: 'User registered successfully',
-      user: {
-        id: newUser._id,
-        name: newUser.name,
-        email: newUser.email,
-        role: newUser.role,
-        tenantId: newUser.tenantId
-      }
-    });
+//     res.status(201).json({
+//       message: 'User registered successfully',
+//       user: {
+//         id: newUser._id,
+//         name: newUser.name,
+//         email: newUser.email,
+//         role: newUser.role,
+//         tenantId: newUser.tenantId
+//       }
+//     });
 
-  } catch (err) {
-    res.status(500).json({ message: 'Registration failed', error: err.message });
-  }
-};
+//   } catch (err) {
+//     res.status(500).json({ message: 'Registration failed', error: err.message });
+//   }
+// };
 
 
 
@@ -55,8 +55,9 @@ exports.registerAdmin = async (req, res) => {
   try {
     console.log('⚡️ registerAdmin called');
     const { name, email, password } = req.body;
-
-    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log('🔐 Raw password before hashing:', password);
+    const hashedPassword = await bcrypt.hash(password, 7);
+    console.log('🔐 Hashed password:', hashedPassword);
 
     let admin = new User({
       name,
@@ -66,7 +67,7 @@ exports.registerAdmin = async (req, res) => {
       tenantId: null
     });
 
-    await admin.save();
+    // await admin.save();
     admin.tenantId = admin._id;
     await admin.save();
 
@@ -148,9 +149,11 @@ exports.login = async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
+    console.log('📥 Raw input password:', JSON.stringify(password));
+    console.log('🔐 Stored hashed password:', user.password);
 
     // 🔐 Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password.trim(), user.password);
     if (!isMatch) {
       console.log('🔐 Input password:', password);
       console.log('🔐 Stored hash:', user.password);
@@ -158,9 +161,9 @@ exports.login = async (req, res) => {
       console.log('Login request:', req.body);
       console.log('User found:', user);
 
-
       return res.status(401).json({ message: 'Invalid password' });
     }
+
 
     // 🛠️ Fallback: Assign tenantId if missing (especially for admins)
     if (!user.tenantId) {
