@@ -11,7 +11,6 @@ exports.createUser = async (req, res) => {
       email,
       password: hashedPassword,
       role,
-      tenantId: req.user.tenantId // attach tenant context
     });
 
     await newUser.save();
@@ -24,7 +23,7 @@ exports.createUser = async (req, res) => {
 // Get all users under current tenant
 exports.getUsers = async (req, res) => {
   try {
-    const users = await User.find({ tenantId: req.user.tenantId });
+    const users = await User.find();
     res.json(users);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching users', error: err.message });
@@ -34,8 +33,7 @@ exports.getUsers = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const deleted = await User.findOneAndDelete({
-      _id: req.params.id,
-      tenantId: req.user.tenantId
+      _id: req.params.id
     });
 
     if (!deleted) return res.status(404).json({ message: 'User not found' });

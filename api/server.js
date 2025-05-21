@@ -18,11 +18,6 @@ const userRoutes = require('./routes/userRoutes');
 // Load mongoose models
 const { Task } = require('./db/models/task.model');
 
-// ✅ Setup CORS properly for local dev
-// app.use(cors({
-//     origin: 'http://localhost:4200',
-//     credentials: true
-// }));
 const allowedOrigins = [
   'http://localhost:4200',
   'https://my-managerr.netlify.app'

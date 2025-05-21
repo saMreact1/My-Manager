@@ -12,7 +12,7 @@
     background: linear-gradient(135deg, #cbdde9, #c8e6c9);
     text-align: center;
     padding: 2rem;
-  
+
     h1 {
       font-size: 3rem;
       color: #1e88e5;
@@ -24,7 +24,7 @@
       color: #2e7d32;
       margin-bottom: 2rem;
     }
-  
+
     .cta-buttons {
       display: flex;
       gap: 1rem;
@@ -36,4 +36,68 @@
       padding: 0.75rem 2rem;
       margin: 0 10px;
     }
+}
+
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 608px) {
+  .homepage {
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-buttons {
+      gap: 0rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 426px) {
+  .homepage {
+    h1 {
+      font-size: 1.7rem;
+      margin-bottom: .5rem;
+    }
+
+    p {
+      font-size: .9rem;
+      margin-bottom: .7rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      margin: 0 5px;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 372px) {
+  .homepage {
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: .2rem;
+    }
+
+    p {
+      font-size: .75rem;
+        margin-bottom: .2rem;
+    }
+
+    button {
+      padding: 0.5rem .7rem;
+      margin: 0 5px;
+      font-size: .7rem;
+    }
+  }
 }

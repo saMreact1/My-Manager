@@ -55,14 +55,14 @@ export class TaskFormComponent implements OnInit {
     this.taskService.createTask(newTask).subscribe({
       next: (task) => {
         console.log('✅ Task created:', task);
-        this.dialogRef.close(task);
-        // this.taskCreated.emit(task); // Emit the new task to the parent component
+        this.taskCreated.emit(task); // Emit the new task to the parent component
+        this.dialogRef.close();
       },
       error: (err) => {
         console.error('🚨 Error creating task:', err);
       }
     });
-    
+
     this.close(); // Reset the form after submission
   }
 

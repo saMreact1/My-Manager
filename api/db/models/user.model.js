@@ -25,13 +25,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: ['admin', 'user'],
     default: 'user',
-  },
-  tenantId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  } // ref to the admin who owns this user
-}, {
-  timestamps: true
+  }
 });
 
 // Hash password before saving
@@ -46,6 +40,5 @@ UserSchema.methods.comparePassword = function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-UserSchema.index({ tenantId: 1 })
 const User = mongoose.model('User', UserSchema);
 module.exports = { User };

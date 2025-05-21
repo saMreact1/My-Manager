@@ -1,19 +1,25 @@
+import { Task } from './../../../model/task.model';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Task } from '../../../model/task.model';
 import { isPlatformBrowser } from '@angular/common';
 import { WebService } from '../web-request/web.service';
 import  { HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
   constructor(
-    private webService: WebService
+    private webService: WebService,
+    private auth: AuthService
   ) {}
 
   getTasks(): Observable<any> {
+    const token = this.auth.getToken();
+    const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`
+  });
     return this.webService.get('tasks');
   }
 
@@ -31,11 +37,10 @@ export class TaskService {
 
   getUserTasks(): Observable<any> {
     const token = localStorage.getItem('token');
-
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
 
-    return this.webService.get('tasks/user', { headers }); // ✅ pass headers here
+    return this.webService.get('tasks', { headers }); // ✅ pass headers here
   }
 }

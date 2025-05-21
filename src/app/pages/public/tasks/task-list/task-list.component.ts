@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Task } from '../../../../model/task.model';
 import { TaskService } from '../../../../core/services/task/task.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
@@ -18,7 +18,7 @@ export class TaskListComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class TaskListComponent implements OnInit {
   onStatusChange(event: Event, task: Task) {
     const selectElement = event.target as HTMLSelectElement;
     const newStatus = selectElement.value;
-    
+
     const updatedTask = { ...task, status: newStatus };
 
     this.taskService.updateTask(updatedTask).subscribe({
@@ -62,21 +62,21 @@ export class TaskListComponent implements OnInit {
   }
 
   showTaskForm() {
-    this.dialog.open(TaskFormComponent, {
-      data: {mode: 'create'},
+    const dialogRef = this.dialog.open(TaskFormComponent, {
+      data: { mode: 'create' },
       width: '400px',
       autoFocus: true,
       disableClose: false,
       restoreFocus: true
-    }).afterClosed().subscribe((result) => {
-      console.log('Dialog closed with result:', result)
-      if (result) {
-        this.tasks.unshift(result)
-        // this.tasks.push(result)
-      }
-    })
-    console.log('form opened');
+    });
+
+    // 🔥 Listen to taskCreated output from the form component
+    dialogRef.componentInstance.taskCreated.subscribe((task: Task) => {
+      console.log('📦 New task created, refreshing list...');
+      this.getTasks();
+    });
   }
+
 
   openTask(task: Task) {
     this.dialog.open(TaskDetailComponent, {
@@ -97,7 +97,7 @@ export class TaskListComponent implements OnInit {
           console.error("❌ No valid task ID to delete:", task);
           return;
         }
-  
+
         this.taskService.deleteTask(task._id).subscribe({
           next: () => {
             console.log(`✅ Task ${task._id} deleted`);
@@ -112,7 +112,7 @@ export class TaskListComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.taskService.getTasks().subscribe({
+    this.taskService.getUserTasks().subscribe({
       next: (data: Task[]) => {
         this.tasks = data;
       },

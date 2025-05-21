@@ -14,21 +14,21 @@
     --text-color: #fff;
     background-color: #121212;
     color: white;
-  
+
     .mat-toolbar {
       background-color: #1e1e1e !important;
       color: white !important;
     }
-  
+
     .sidenav {
       background-color: #1f1f2b !important;
     }
-  
+
     .main-content {
       background-color: #121212 !important;
     }
   }
-  
+
   :root {
     --bg: #f4f6f8;
     --sidebar-bg: #ffffff;
@@ -37,7 +37,7 @@
     --active-link-bg: #e3f2fd;
     --hover-bg: #f0f0f0;
   }
-  
+
   .dark-theme {
     --bg: #121212;
     --sidebar-bg: #1e1e1e;
@@ -46,4 +46,9 @@
     --active-link-bg: #263238;
     --hover-bg: #2a2a2a;
   }
-  
+
+@media only screen and (max-width: 430px) {
+  html {
+    --mat-form-field-container-height: 49px;
+  }
+}

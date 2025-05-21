@@ -4,35 +4,24 @@ const { User } = require('../db/models/user.model')
 const JWT_SECRET = process.env.JWT_SECRET || 'superSecretKey';
 
 exports.authenticate = async (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+
   try {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'Missing or invalid token' });
-    }
-
-    const token = authHeader.split(' ')[1];
-    const decoded = jwt.verify(token, JWT_SECRET);
-
-    // Optional: fetch user from DB if needed
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
 
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid token user' });
-    }
+    if (!user) return res.status(404).json({ message: "User not found" });
 
     req.user = {
-      id: decoded._id,
-      name: decoded.name,
-      email: decoded.email,
-      role: decoded.role,
-      tenantId: decoded.tenantId
+      id: user._id,
+      role: user.role,
+      tenantId: user.tenantId // if you’re using multi-tenant logic
     };
 
     next();
   } catch (err) {
-    console.error('Auth error:', err);
-    return res.status(401).json({ message: 'Token verification failed' });
+    res.status(401).json({ message: "Invalid token" });
   }
 };
 

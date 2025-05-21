@@ -38,14 +38,9 @@ const TaskSchema = new mongoose.Schema({
   },
   _taskId: {
     type: mongoose.Types.ObjectId,
-  },
-  tenantId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
   }
 });
 
-TaskSchema.index({ tenantId: 1 })
 const Task = mongoose.model('Task', TaskSchema);
 
 module.exports = { Task };

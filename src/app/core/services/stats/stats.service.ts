@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class StatsService {
-  // private apiUrl = 'http://localhost:3000/tasks/stats'
+  // private apiUrl = 'http://localhost:3000/'
 
   constructor(private http: HttpClient) { }
 

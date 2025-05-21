@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  // private apiUrl = 'http://localhost:3000/admin/users';
+  // private apiUrl = 'http://localhost:3000/';
 
   constructor(
     private web: WebService,

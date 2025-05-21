@@ -11,6 +11,7 @@ export class WebService {
 
   constructor(private http: HttpClient) {
     this.ROOT_URL = 'https://my-manager-api.onrender.com';
+    // this.ROOT_URL = 'http://localhost:3000';
   }
 
   get(url: string, options = {}): Observable<any> {

@@ -2,10 +2,20 @@
     background-color: rgb(26, 26, 42);
     color: aliceblue;
     height: 4rem;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
     .logo {
-        font-weight: bold;
-        font-size: 20px;
-        margin-left: 1rem;
+      font-weight: bold;
+      font-size: 20px;
+      /* margin-left: 1rem; */
+    }
+    .logo-img {
+      width: 1.4rem;
+      height: 1.4rem;
     }
     .spacer { flex: 1 1 auto; }
     .hide-mobile {
@@ -41,4 +51,25 @@
 
 .nav-bar .toggle {
     margin-left: 2rem;
+}
+
+
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 426px) {
+  .nav-bar {
+    .logo {
+      font-size: 18px;
+    }
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  .nav-bar {
+    .logo {
+      font-size: 16px;
+    }
+  }
 }

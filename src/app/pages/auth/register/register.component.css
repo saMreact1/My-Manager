@@ -2,14 +2,14 @@
     height: 100vh;
     background: linear-gradient(135deg, #6e818d, #4d874f);
 }
-  
+
 .auth-container {
   width: 30%;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 2rem;
+  padding: 1rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
@@ -23,7 +23,7 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 
     mat-form-field {
       width: 100%;
@@ -40,7 +40,7 @@
       }
     }
 
-    
+
   }
   .switch-link {
       text-align: center;
@@ -59,7 +59,7 @@
   font-weight: bold;
   /* margin-top: 1rem; */
 }
-  
+
 .success-message {
   color: green;
   font-size: 0.8rem;
@@ -67,4 +67,85 @@
   font-family: monospace;
   font-weight: bold;
   /* margin-top: 1rem; */
+}
+
+
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 865px) {
+  .auth-container {
+    width: 42%;
+  }
+}
+
+
+@media only screen and (max-width: 680px) {
+  .auth-container {
+    width: 55%;
+  }
+}
+
+
+@media only screen and (max-width: 490px) {
+  .auth-container {
+    width: 68%;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .auth-container {
+    width: 70%;
+
+    form {
+      gap: .1rem;
+    }
+
+    ::ng-deep .mdc-text-field--outlined {
+      height: 50px;
+    }
+
+    ::ng-deep .mdc-floating-label {
+      font-size: 14px;
+    }
+
+    .switch-link {
+      font-size: 0.8rem;
+    }
+
+    ::ng-deep .mat-mdc-select-value-text {
+      font-size: .85rem;
+    }
+
+    button {
+      font-size: .85rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 332px) {
+  .auth-container {
+    h2 {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .auth-container {
+    width: 80%;
+
+    form {
+      gap: 0;
+    }
+
+    ::ng-deep .mdc-floating-label {
+      font-size: 12px;
+    }
+
+    .switch-link {
+      font-size: 0.7rem;
+    }
+  }
 }
