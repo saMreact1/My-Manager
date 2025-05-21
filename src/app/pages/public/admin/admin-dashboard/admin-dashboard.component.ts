@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../../../core/services/task/task.service';
 import { UserService } from '../../../../core/services/user/user.service';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -35,21 +36,34 @@ import { animate, style, transition, trigger } from '@angular/animations';
     ])
   ]
 })
-export class AdminDashboardComponent {
+
+export class AdminDashboardComponent implements OnInit {
 
   users: any[] = [];
   tasks: any[] = [];
   isCollapsed: boolean = true;
+  isSmallScreen: boolean = false;
   isDarkMode: boolean = false;
+  userName: string;
 
   constructor(
     private taskService: TaskService,
     private userService: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+      this.isSmallScreen = result.matches;
+      this.isCollapsed = !this.isSmallScreen;
+    })
     this.taskService.getTasks().subscribe(tasks => this.tasks = tasks)
+    this.loadUserInfo();
+  }
+
+  get sidenavMode() {
+    return this.isSmallScreen ? 'over' : 'side';
   }
 
   logout() {
@@ -62,5 +76,10 @@ export class AdminDashboardComponent {
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
     document.body.classList.toggle('dark-theme', this.isDarkMode);
+  }
+
+  loadUserInfo() {
+    const user = this.userService.getUser();
+    this.userName = user?.name || 'User';
   }
 }

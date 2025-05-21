@@ -21,6 +21,12 @@
   width: 190px;
   padding: 0;
   background: #0057a4 url('../../../../assets/img/blue-fluid-background-frame.avif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  transition: width 0.3s ease;
+  border-right: none;
+  overflow: hidden;
   border: none;
 }
 

@@ -16,8 +16,7 @@ import { StatsCardsComponent } from './pages/public/admin/stats-cards/stats-card
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    component: HomeComponent
   },
   {
     path: 'home',

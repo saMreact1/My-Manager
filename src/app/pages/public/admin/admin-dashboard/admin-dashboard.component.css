@@ -11,7 +11,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
-  transition: width 0.3s ease;
+  transition: width 0.3s ease-in-out;
   border-right: none;
   overflow: hidden;
 }
@@ -24,10 +24,6 @@
 .sidenav.collapsed .mat-nav-list span {
   display: none;
 }
-
-/* .sidenav.collapsed .mat-icon {
-  margin-right: 0;
-} */
 
 .logo-container {
   background-color: var(--bg);
@@ -46,10 +42,6 @@
   height: 32px;
   border-radius: 10px;
 }
-
-/* .sidenav .logo-container span {
-  margin-top: 0.3rem;
-} */
 
 .sidenav mat-nav-list {
   margin-top: 2.5rem;
@@ -110,10 +102,6 @@ mat-nav-list a:nth-of-type(5) {
   align-items: center;
 }
 
-/* .sidenav mat-nav-list a div span {
-  margin-top: 0.3rem;
-} */
-
 .toolbar {
   position: sticky;
   top: 0;
@@ -150,4 +138,85 @@ mat-nav-list a:nth-of-type(5) {
   background: url('../../../../../assets/img/white-bg.jpg');
   flex-grow: 1;
   overflow-y: auto;
+}
+
+
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 1093px) {
+  .content-wrapper {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  .main-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .main-content.collapsed {
+    width: 100% !important;
+  }
+
+  .toolbar .toolbar-title {
+    font-size: 1.1rem;
+  }
+
+  .toolbar button mat-icon {
+    font-size: 20px;
+  }
+
+  .toolbar button.mat-icon-button:first-child {
+    display: none;
+  }
+}
+
+
+@media only screen and (max-width: 601px) {
+  .sidenav {
+    width: 160px;
+  }
+
+  .brand-logo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .logo-container {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .sidenav {
+    width: 150px;
+  }
+
+  mat-nav-list a {
+    padding: 20px 10px;
+  }
+
+  mat-nav-list a span {
+    font-size: .87rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .toolbar .toolbar-title {
+    display: none;
+  }
+
+  .toolbar button mat-icon {
+    font-size: 18px;
+  }
+
+  /* mat-nav-list a span {
+    display: none;
+  } */
 }

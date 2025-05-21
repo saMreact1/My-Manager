@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-  padding: 4rem;
+  padding: 2.5rem 3rem;
 }
 
 .stat-card {
@@ -40,30 +40,18 @@
   }
 }
 
-/* .widget-card {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  color: #fff;
-  transition: all 0.3s ease-in-out;
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
+/* MEDIA QUERIES */
 
-  &.primary { background: #3f51b5; }
-  &.accent { background: #ff4081; }
-  &.warn { background: #f44336; }
-  &.success { background: #4caf50; }
-
-  .widget-icon {
-    font-size: 40px;
-    margin-right: 1rem;
+@media only screen and (max-width: 1136px) {
+  .cards-grid {
+    padding: 2rem;
   }
+}
 
-  .widget-details {
-    .widget-title {
-      font-weight: 600;
-    }
-    .widget-count {
-      font-size: 1.5rem;
-    }
+@media only screen and (max-width: 1091px) {
+  .cards-grid {
+    padding: 1rem;
   }
-} */
-
+}
