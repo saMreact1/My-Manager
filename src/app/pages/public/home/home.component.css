@@ -1,6 +1,7 @@
 .home-container {
-    height: 100vh;
-    background: linear-gradient(135deg, #cbdde9, #c8e6c9);
+  height: 100vh;
+  background: linear-gradient(135deg, #cbdde9, #c8e6c9);
+  overflow: hidden;
 }
 
 .homepage {
@@ -62,7 +63,7 @@
 }
 
 
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 430px) {
   .homepage {
     h1 {
       font-size: 1.7rem;

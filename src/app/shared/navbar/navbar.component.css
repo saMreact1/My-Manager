@@ -2,6 +2,8 @@
     background-color: rgb(26, 26, 42);
     color: aliceblue;
     height: 4rem;
+    position: absolute;
+    top: 0;
 
     div {
       display: flex;

@@ -15,8 +15,7 @@ exports.authenticate = async (req, res, next) => {
 
     req.user = {
       id: user._id,
-      role: user.role,
-      tenantId: user.tenantId // if you’re using multi-tenant logic
+      role: user.role
     };
 
     next();
