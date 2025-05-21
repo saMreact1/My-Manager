@@ -2,6 +2,7 @@
   height: 100vh;
   background: linear-gradient(135deg, #cbdde9, #c8e6c9);
   overflow: hidden;
+  border: 1px solid red;
 }
 
 .homepage {
@@ -9,10 +10,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 4rem);
+    height: 100vh;
     background: linear-gradient(135deg, #cbdde9, #c8e6c9);
     text-align: center;
     padding: 2rem;
+    border: 1px solid red;
 
     h1 {
       font-size: 3rem;
@@ -83,10 +85,10 @@
 }
 
 
-@media only screen and (max-width: 372px) {
+@media only screen and (max-width: 390px) {
   .homepage {
     h1 {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       margin-bottom: .2rem;
     }
 
