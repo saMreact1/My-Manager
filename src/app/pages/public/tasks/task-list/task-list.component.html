@@ -1,51 +1,47 @@
 <main>
-    <!-- <app-navbar></app-navbar> -->
-    
-    <div class="container">
-        <button class="add-task-btn" (click)="showTaskForm()">+ Add new task</button>
-        <h3 (click)="toggleTasks()">
-            All Tasks 
-            <i *ngIf="isExpanded" class="fa fa-chevron-down"></i>
-            <i *ngIf="!isExpanded" class="fa fa-chevron-up"></i>
-        </h3>
-  
-        <div class="task-container" *ngIf="isExpanded">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tasks</th>
-                        <th>Status</th>
-                        <th>Priority</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let task of tasks">
-                        <td>{{ task.title }}</td>
-                        <!-- <td>{{ task.description }}</td> -->
-                        <td class="status" [ngClass]="task.status.toLowerCase()">
-                            <select class="status" [(ngModel)]="task.status" (change)="onStatusChange($event, task)">
-                                <option class="pending" [value]="'Pending'" [selected]="task.status === 'Pending'">Pending</option>
-                                <option class="in-progress" [value]="'In-Progress'" [selected]="task.status === 'In-Progress'">In Progress</option>
-                                <option class="done" [value]="'Done'" [selected]="task.status === 'Done'">Done</option>
-                            </select>
-                        </td>
-                        <td class="priority" [ngClass]="task.priority.toLowerCase()"><p>{{ task.priority }}</p></td>
-                        <td class="actions">
-                          <!-- <button class="delete-btn" (click)="deleteTask(task.id); $event.stopPropagation()"><img src="../../../assets/delete.svg" alt=""></button> -->
-                          <button mat-icon-button (click)="openTask(task)">
-                              <mat-icon>visibility</mat-icon>
-                          </button>
-                          <button mat-icon-button (click)="delTask(task)">
-                              <!-- <mat-icon>delete</mat-icon> -->
-                              <img src="../../../../../assets/icons/delete.svg" alt="delete icon">
-                          </button>
-                      </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="container">
+    <button class="add-task-btn" (click)="showTaskForm()">+ Add new task</button>
+    <h3 (click)="toggleTasks()">
+        All Tasks
+        <i *ngIf="isExpanded" class="fa fa-chevron-down"></i>
+        <i *ngIf="!isExpanded" class="fa fa-chevron-up"></i>
+    </h3>
+
+    <div class="task-container" *ngIf="isExpanded">
+      <table>
+        <thead>
+            <tr>
+              <th>Tasks</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <td class="titlw">{{ task.title }}</td>
+
+            <td class="status" [ngClass]="task.status.toLowerCase()">
+              <select class="status" [(ngModel)]="task.status" (change)="onStatusChange($event, task)">
+                <option class="pending" [value]="'Pending'" [selected]="task.status === 'Pending'">Pending</option>
+                <option class="in-progress" [value]="'In-Progress'" [selected]="task.status === 'In-Progress'">In Progress</option>
+                <option class="done" [value]="'Done'" [selected]="task.status === 'Done'">Done</option>
+              </select>
+            </td>
+
+            <td class="priority" [ngClass]="task.priority.toLowerCase()"><p>{{ task.priority }}</p></td>
+
+            <td class="actions">
+              <span mat-icon-button (click)="openTask(task)">
+                <mat-icon>visibility</mat-icon>
+              </span>
+              <span mat-icon-button (click)="delTask(task)">
+                <mat-icon>delete_forever</mat-icon>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  
-    <!-- <app-task-form *ngIf="showTaskForm" (closeForm)="showTaskForm = false" (taskCreated)="createTask($event)"></app-task-form> -->
-  </main>
+  </div>
+</main>

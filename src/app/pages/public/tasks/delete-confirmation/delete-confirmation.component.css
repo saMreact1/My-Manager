@@ -1,6 +1,22 @@
 .container {
     padding: 20px;
+    text-align: center;
 }
 .container button {
     width: 100%;
+}
+
+
+/* MEDIA QUESRIES */
+/* MEDIA QUESRIES */
+/* MEDIA QUESRIES */
+
+@media only screen and (max-width: 550px) {
+  .container h2 {
+    font-size: 1rem;
+  }
+
+  .container button {
+    font-size: .8rem;
+  }
 }
