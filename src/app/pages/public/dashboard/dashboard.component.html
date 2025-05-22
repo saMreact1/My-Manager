@@ -1,19 +1,19 @@
 <mat-sidenav-container class="dashboard-container">
-  <mat-sidenav #sidenav [mode]="isHandset ? 'over' : 'side'" class="sidenav mat-elevation-z8" [opened]="!isHandset">
+  <mat-sidenav #sidenav [mode]="sidenavMode" [autoFocus]="false" (backdropClick)="isCollapsed = false" class="sidenav mat-elevation-z8" [(opened)]="isCollapsed">
     <div class="logo-container">
       <img src="../../../../../assets/icons/logo.jpg" class="brand-logo" />
       <span class="brand-name">My Manager</span>
     </div>
 
     <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard/tasks" routerLinkActive="active-link" class="tasks" matTooltip="Tasks" matTooltipPosition="right">
+      <a mat-list-item routerLink="/dashboard/tasks" routerLinkActive="active-link" class="tasks" matTooltip="Tasks" matTooltipPosition="right" (click)="isSmallScreen && (isCollapsed = false)">
         <div>
           <mat-icon>assignment</mat-icon>
           <span>My Tasks</span>
         </div>
       </a>
 
-      <a mat-list-item routerLink="/dashboard/coming-soon" routerLinkActive="active-link" class="profile" matTooltip="Profile" matTooltipPosition="right">
+      <a mat-list-item routerLink="/dashboard/coming-soon" routerLinkActive="active-link" class="profile" matTooltip="Profile" matTooltipPosition="right" (click)="isSmallScreen && (isCollapsed = false)">
         <div>
           <mat-icon>person</mat-icon>
           <span>Profile</span>
@@ -31,7 +31,7 @@
 
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="user-navbar">
-      <button mat-icon-button *ngIf="isHandset" (click)="sidenav.toggle()">
+      <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <h2>Welcome back, {{ userName }}👋</h2>

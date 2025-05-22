@@ -39,23 +39,31 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class DashboardComponent implements OnInit {
   tasks: any[] = [];
   userName: string;
-  isHandset: boolean = false;
+  isCollapsed: boolean = true;
+  isSmallScreen: boolean = false;
 
   constructor(
     private taskService: TaskService,
     private userService: UserService,
     private auth: AuthService,
     private breakpointObserver: BreakpointObserver
-  ) {
-    this.breakpointObserver.observe([Breakpoints.Handset])
-      .subscribe(result => {
-        this.isHandset = result.matches;
-      });
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+      this.isSmallScreen = result.matches;
+      this.isCollapsed = !this.isSmallScreen;
+    })
     this.loadUserInfo();
     this.loadUserTasks();
+  }
+
+  get sidenavMode() {
+    return this.isSmallScreen ? 'over' : 'side';
+  }
+
+  toggleSidenav() {
+    this.isCollapsed = !this.isCollapsed;
   }
 
   loadUserInfo() {
