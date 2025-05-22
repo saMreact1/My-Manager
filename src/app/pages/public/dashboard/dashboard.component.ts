@@ -3,6 +3,7 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 import { TaskService } from '../../../core/services/task/task.service';
 import { UserService } from '../../../core/services/user/user.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,13 +39,19 @@ import { animate, style, transition, trigger } from '@angular/animations';
 export class DashboardComponent implements OnInit {
   tasks: any[] = [];
   userName: string;
-  isCollapsed: boolean = true;
+  isHandset: boolean = false;
 
   constructor(
     private taskService: TaskService,
     private userService: UserService,
     private auth: AuthService,
-  ) {}
+    private breakpointObserver: BreakpointObserver
+  ) {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isHandset = result.matches;
+      });
+  }
 
   ngOnInit(): void {
     this.loadUserInfo();

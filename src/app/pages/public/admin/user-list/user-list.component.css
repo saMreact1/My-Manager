@@ -2,7 +2,7 @@
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .3rem;
 }
 
 .search-wrapper {
@@ -88,6 +88,9 @@ mat-chip.warn {
 }
 
 .paginator {
+  width: calc(100% - 8rem);
+  position: absolute;
+  bottom: 10px;
   display: flex;
   justify-content: flex-end;
   margin-top: 1rem;
