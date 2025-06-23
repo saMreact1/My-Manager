@@ -18,7 +18,7 @@ export interface DecodedToken {
   providedIn: 'root'
 })
 export class AuthService {
-  // private apiUrl = 'http://localhost:3000/'
+  private apiUrl = 'http://localhost:3000/'
 
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser$ = this.currentUserSubject.asObservable();
@@ -83,11 +83,11 @@ export class AuthService {
   }
 
   forgotPassword(email: string) {
-    return this.http.post(`${environment.apiUrl}auth/forgot-password`, { email });
+    return this.http.post(`${this.apiUrl}auth/forgot-password`, { email });
   }
 
   resetPassword(token: string, newPassword: string) {
-    return this.http.post(`${environment.apiUrl}auth/reset-password`, { token, newPassword });
+    return this.http.post(`${this.apiUrl}auth/reset-password`, { token, newPassword });
   }
 
   isLoggedIn(): boolean {

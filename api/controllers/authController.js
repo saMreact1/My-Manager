@@ -69,11 +69,6 @@ exports.login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // if (user.role === 'admin' && !user.tenantId) {
-    //   user.tenantId = user._id;
-    //   await user.save();
-    // }
-
     const token = createToken(user);
 
     res.status(200).json({

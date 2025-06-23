@@ -43,12 +43,16 @@
 
 
     }
-    .switch-link {
+    .switch-link, .forgot-password {
       text-align: center;
       font-size: 0.9rem;
       color: #5c6bc0;
       cursor: pointer;
       margin-top: 1rem;
+
+      & a {
+        text-decoration: none;
+      }
     }
   }
 
@@ -112,7 +116,7 @@
       font-size: 14px;
     }
 
-    .switch-link {
+    .switch-link, .forgot-password {
       font-size: 0.8rem;
     }
   }
