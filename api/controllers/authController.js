@@ -92,6 +92,22 @@ exports.login = async (req, res) => {
   }
 };
 
+const sendResetEmail = async (to, token) => {
+  const resetLink = `https://my-manager-api.onrender.com/reset-password?token=${token}`
+  return transporter.sendMail({
+    from: `"My Manager" <${process.env.EMAIL_USERNAME}>`,
+    to,
+    subject: 'Password Reset Request',
+    html: `
+      <h2>Reset Your Password</h2>
+      <p>Click the link below to reset your password:</p>
+      <a href="${resetLink}">Reset Password</a>
+      <p>If you did not request this, please ignore this email.</p>
+      <p>Thank you!</p>
+    `
+  })
+}
+
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
   try {
@@ -105,6 +121,7 @@ exports.forgotPassword = async (req, res) => {
     await sendResetEmail(user.email, token);
     res.status(200).json({ msg: "Reset link sent to your email" });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ msg: "Server error" });
   }
 };
@@ -122,20 +139,4 @@ exports.resetPassword = async (req, res) => {
   } catch (err) {
     res.status(400).json({ msg: "Token invalid or expired" });
   }
-}
-
-exports.sendResetEmail = async (to, token) => {
-  const resetLink = `https://my-manager-api.onrender.com/reset-password?token=${token}`
-  return transporter.sendMail({
-    from: `"My Manager" <${process.env.EMAIL_USER}>`,
-    to,
-    subject: 'Password Reset Request',
-    html: `
-      <h2>Reset Your Password</h2>
-      <p>Click the link below to reset your password:</p>
-      <a href="${resetLink}">Reset Password</a>
-      <p>If you did not request this, please ignore this email.</p>
-      <p>Thank you!</p>
-    `
-  })
 }
