@@ -88,7 +88,7 @@ exports.login = async (req, res) => {
 };
 
 const sendResetEmail = async (to, token) => {
-  const resetLink = `https://my-manager-api.onrender.com/reset-password?token=${token}`
+  const resetLink = `https://my-managerr.netlify.app/reset-password?token=${token}`
   return transporter.sendMail({
     from: `"My Manager" <${process.env.EMAIL_USERNAME}>`,
     to,
@@ -116,7 +116,7 @@ exports.forgotPassword = async (req, res) => {
     await sendResetEmail(user.email, token);
     res.status(200).json({ msg: "Reset link sent to your email" });
   } catch (err) {
-    console.log(err);
+    console.error('❌ Forgot password error:', err);
     res.status(500).json({ msg: "Server error" });
   }
 };
