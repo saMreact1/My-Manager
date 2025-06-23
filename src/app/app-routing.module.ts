@@ -12,6 +12,8 @@ import { roleGuard } from './pages/auth/authguard/role.guard';
 import { CreateUserComponent } from './pages/public/admin/create-user/create-user.component';
 import { UserListComponent } from './pages/public/admin/user-list/user-list.component';
 import { StatsCardsComponent } from './pages/public/admin/stats-cards/stats-cards.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -29,6 +31,12 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  { path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  { path: 'reset-password',
+    component: ResetPasswordComponent
   },
   {
     path: 'tasks',

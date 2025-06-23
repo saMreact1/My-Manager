@@ -49,6 +49,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipListbox } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 
 
@@ -71,7 +73,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     StatsCardsComponent,
     ChartsComponent,
     LoaderComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

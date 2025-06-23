@@ -75,12 +75,19 @@ export class AuthService {
     );
   }
 
-
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.currentUserSubject.next(null);
     this.router.navigate(['/home']);
+  }
+
+  forgotPassword(email: string) {
+    return this.http.post(`${environment.apiUrl}auth/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string) {
+    return this.http.post(`${environment.apiUrl}auth/reset-password`, { token, newPassword });
   }
 
   isLoggedIn(): boolean {
