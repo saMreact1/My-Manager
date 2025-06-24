@@ -1,6 +1,8 @@
 .container {
-    height: 100vh;
-    background: linear-gradient(135deg, #6e818d, #4d874f);
+    min-height: 100vh;
+    background: url('../../../../assets/img/blue-fluid-background-frame.avif');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .auth-container {
@@ -12,7 +14,7 @@
   padding: 1rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  background: url(../../../../assets/img/white_bg.avif);
 
   h2 {
     color: #6a1b9a;

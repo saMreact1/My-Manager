@@ -29,6 +29,8 @@ export class ForgotPasswordComponent {
       error: () => this.snack.open('Failed to send password reset link', 'Close', { duration: 3000 })
     });
 
-    this.router.navigate(['/home']);
+    setInterval(() => {
+      this.router.navigate(['/home']);
+    }, 5000);
   }
 }

@@ -32,7 +32,9 @@ export class ResetPasswordComponent {
     this.auth.resetPassword(this.token, this.form.value.password).subscribe({
       next: () => {
         this.snack.open('Password has been reset successfully', 'Close', { duration: 3000 });
-        this.router.navigate(['/auth/login']);
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 5000);
       },
       error: (err) => {
         console.error(err);
