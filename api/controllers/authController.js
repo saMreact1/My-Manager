@@ -17,10 +17,23 @@ const createToken = (user) => {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USERNAME, // Your email address
+    user: process.env.EMAIL_USER, // Your email address
     pass: process.env.EMAIL_PASSWORD  // Your email password or app password
   }
 });
+
+console.log('🧪 Email:', process.env.EMAIL_USER);
+console.log('🔒 Password exists:', !!process.env.EMAIL_PASSWORD);
+
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.error('❌ Nodemailer failed to connect:', error);
+  } else {
+    console.log('✅ Nodemailer is ready to send emails');
+  }
+});
+
 
 exports.register = async (req, res) => {
   try {
@@ -89,18 +102,22 @@ exports.login = async (req, res) => {
 
 const sendResetEmail = async (to, token) => {
   const resetLink = `https://my-managerr.netlify.app/reset-password?token=${token}`
-  return transporter.sendMail({
-    from: `"My Manager" <${process.env.EMAIL_USERNAME}>`,
-    to,
-    subject: 'Password Reset Request',
-    html: `
-      <h2>Reset Your Password</h2>
-      <p>Click the link below to reset your password:</p>
-      <a href="${resetLink}">Reset Password</a>
-      <p>If you did not request this, please ignore this email.</p>
-      <p>Thank you!</p>
-    `
-  })
+  try {
+    return await transporter.sendMail({
+      from: `"My Manager" <${process.env.EMAIL_USER}>`,
+      to,
+      subject: 'Password Reset Request',
+      html: `
+        <h2>Reset Your Password</h2>
+        <p>Click the link below to reset your password:</p>
+        <a href="${resetLink}">Reset Password</a>
+        <p>If you did not request this, please ignore this email.</p>
+      `
+    });
+  } catch (err) {
+    console.error("❌ Failed to send reset email:", err);
+    throw new Error("Email sending failed");
+  }
 }
 
 exports.forgotPassword = async (req, res) => {

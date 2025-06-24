@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,7 +17,8 @@ export class ForgotPasswordComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private router: Router
   ) {}
 
   onSubmit() {
@@ -26,5 +28,7 @@ export class ForgotPasswordComponent {
       next: () => this.snack.open('Password reset link has been sent to your email', 'Close', { duration: 3000 }),
       error: () => this.snack.open('Failed to send password reset link', 'Close', { duration: 3000 })
     });
+
+    this.router.navigate(['/home']);
   }
 }
