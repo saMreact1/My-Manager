@@ -15,6 +15,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background: url(../../../../assets/img/white_bg.avif);
+  opacity: .8;
 
   h2 {
     color: #6a1b9a;
@@ -39,6 +40,10 @@
 
       &:hover {
         background-color: #00838f;
+      }
+
+      &:disabled {
+        background-color: rgba(128, 128, 128, 0.651);
       }
     }
 
